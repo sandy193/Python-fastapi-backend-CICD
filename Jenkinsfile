@@ -19,7 +19,13 @@ pipeline {
         stage('Build Application') {
             steps {
                 script {
-                    sh 'pip3 install -r requirements.txt'
+                    sh 'python3 -m venv venv'
+
+                    sh '''
+                    source venv/bin/activate
+                    pip install --upgrade pip
+                    pip install -r requirements.txt
+                    '''
                 }
             }
         }
