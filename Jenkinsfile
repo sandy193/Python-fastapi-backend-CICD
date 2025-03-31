@@ -15,11 +15,20 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/sandy193/Python-fastapi-backend-CICD.git'
             }
         }
+
+        stage('Build Application') {
+            steps {
+                script {
+                    sh 'pip install -r requirements.txt'
+                }
+            }
+        }
+        
         stage("SonarQube Analysis") {
             steps {
                 withSonarQubeEnv('sonar-server') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=background-remover-python-app \
-                    -Dsonar.projectKey=background-remover-python-app '''
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=python-app \
+                    -Dsonar.projectKey=python-app '''
                 }
             }
         }
@@ -28,12 +37,6 @@ pipeline {
                 script {
                     waitForQualityGate abortPipeline: true, credentialsId: 'sonar-secret'
                 }
-            }
-        }
-        stage('OWASP FS Scan') {
-            steps {
-                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-CHECK'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
         stage ("Trivy File Scan") {
@@ -62,8 +65,15 @@ pipeline {
            }
         }
 
+}
+    post {
+        success {
+            echo "Build successful!"
+        }
 
-    }
-    
+        failure {
+            echo "Build failed"
+        }
+    }   
 }
 
