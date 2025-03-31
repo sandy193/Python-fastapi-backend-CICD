@@ -22,9 +22,7 @@ pipeline {
                     sh 'python3 -m venv venv'
 
                     sh '''
-                    source venv/Scripts/activate
-                    pip install --upgrade pip
-                    pip install -r requirements.txt
+                    bash -c "source venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt"
                     '''
                 }
             }
