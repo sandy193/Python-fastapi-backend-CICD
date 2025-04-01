@@ -19,4 +19,4 @@ spec:
             - containerPort: 8000
           env:
             - name: DATABASE_URL
-              value: "sqlite:///app/db/database.db"  # SQLite path inside the container
+              value: "sqlite:///./test.db"
