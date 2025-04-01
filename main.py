@@ -34,6 +34,7 @@ app = FastAPI()
 # CORS configuration
 origins = [
     "http://localhost:3000",  # URL of your React app (Frontend)
+    "http://frontend-service:80"
 ]
 
 # Add CORS middleware to allow cross-origin requests from the React app
