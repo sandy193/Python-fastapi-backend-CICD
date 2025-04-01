@@ -37,12 +37,11 @@ origins = [
     "http://frontend-service:80"
 ]
 
-# Add CORS middleware to allow cross-origin requests from the React app
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,  # You can specify the frontend URL(s) here
+    allow_origins=["*"],  # Allow all origins for now, you can restrict it later
     allow_credentials=True,
-    allow_methods=["*"],  # Allow all HTTP methods (GET, POST, etc.)
+    allow_methods=["*"],  # Allow all methods (GET, POST, etc.)
     allow_headers=["*"],  # Allow all headers
 )
 
