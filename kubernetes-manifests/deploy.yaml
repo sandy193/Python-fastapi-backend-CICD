@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: sandydocker19/backend-app:8
+          image: sandydocker19/backend-app:11
           ports:
             - containerPort: 8000
           env:
