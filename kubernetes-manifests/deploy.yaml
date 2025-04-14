@@ -15,6 +15,7 @@ spec:
       containers:
         - name: backend
           image: sandydocker19/backend-app:11
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
           env:
